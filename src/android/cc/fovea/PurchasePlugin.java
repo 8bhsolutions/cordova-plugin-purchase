@@ -555,6 +555,9 @@ public class PurchasePlugin
     // if (replaceSkusProrationMode) { // int
     //   params.setReplaceSkusProrationMode(replaceSkusProrationMode)
     // }
+
+    Log.d(mTag, "buy() -> setReplaceSkusProrationMode");
+    params.setReplaceSkusProrationMode(BillingFlowParams.ProrationMode.IMMEDIATE_WITH_TIME_PRORATION);
     return params.build();
   }
 
@@ -590,6 +593,9 @@ public class PurchasePlugin
       }
       Log.d(mTag, "initiatePurchaseFlow() -> launchBillingFlow."
           + " Replace old SKU? " + (params.getOldSku() != null));
+
+      Log.d(mTag, "initiatePurchaseFlow() -> launchBillingFlow. ProrationMode: " + params.getReplaceSkusProrationMode());
+
       cordova.setActivityResultCallback(this);
       mBillingClient.launchBillingFlow(cordova.getActivity(), params);
     });
